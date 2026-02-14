@@ -1,77 +1,92 @@
-# RKA & RKPD Management System
+# SIPD-RKA Management System 📊
 
-A comprehensive web application for managing Regional Activity Plans (RKA) and Work Plans (Renja), built with modern web technologies to streamline the budgeting process for government agencies.
+> **Sistem Informasi Perencanaan Daerah - Manajemen RKA & RKPD**
+>
+> Solusi modern untuk pengelolaan Rencana Kerja Pemerintah Daerah (RKPD) dan Rencana Kerja Anggaran (RKA) yang efisien, transparan, dan terintegrasi standar SIPD.
 
-## 🚀 Technologies Framework
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=flat-square)
+![Next.js](https://img.shields.io/badge/Next.js-15+-black?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?style=flat-square&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.0+-38B2AC?style=flat-square&logo=tailwind-css)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-green?style=flat-square&logo=supabase)
 
-This project is built using a robust and modern tech stack:
+---
 
-- **Frontend Framework**: [Next.js 15+](https://nextjs.org/) (App Router) - For server-side rendering, routing, and optimal performance.
-- **Language**: [TypeScript](https://www.typescriptlang.org/) - Ensuring type safety and better developer experience.
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework for rapid and responsive UI development.
-- **UI Components**: Custom components (Cards, Modals, Tables) built with Tailwind and Lucide React icons.
-- **Backend / Database**: [Supabase](https://supabase.com/) (PostgreSQL) - For real-time database, authentication, and RESTful APIs.
-- **State Management**: React Hooks (useState, useEffect, useContext).
+## 🎯 Tentang Aplikasi
 
-## ✨ Key Features
+**SIPD-RKA Management System** dirancang untuk membantu Organisasi Perangkat Daerah (OPD) dalam menyusun, memonitor, dan memvalidasi anggaran. Aplikasi ini menggantikan proses manual dengan antarmuka digital yang intuitif, memungkinkan kolaborasi real-time dan perhitungan anggaran yang akurat sesuai standar harga daerah (SSH, SBU, HSPK, ASB).
 
-### 1. **DASHBOARD & MONITORING (Renja)**
-- **Hierarchical View**: Visualizes data in a structured format: *Urusan -> Program -> Kegiatan -> Sub Kegiatan*.
-- **Real-time Budget Monitoring**:
-  - Automatically aggregates "Total Rincian" from detailed inputs.
-  - **Traffic Light Indicators**:
-    - 🔴 **Red**: Budget Surplus (Sisa) - Pagu Validasi > Total Rincian.
-    - 🟢 **Green**: Budget Deficit (Lebih/Over) - Pagu Validasi < Total Rincian.
-    - 🔵 **Blue**: Balanced (Sesuai) - Pagu Validasi = Total Rincian.
-- **Quick Actions**:
-  - Direct **CRUD** for "Pagu Validasi" directly from the table.
-  - Search and filter Sub Activities.
+## ✨ Fitur Unggulan
 
-### 2. **RKA DETAILED INPUT (Rincian Belanja)**
-- **Multi-level Coefficient System**:
-  - Supports complex volume calculations (e.g., `25 Orang x 12 Bulan x 3 Kali`).
-  - Automatically calculates **Total Volume** and formats coefficient strings (e.g., "25 x 12").
-- **Smart Unit Management**:
-  - Auto-suggests combined units (e.g., "Orang Bulan").
-  - Allows **Manual Override** for final unit adjustment (e.g., change "Meter Meter" to "m²").
-- **Price Reference Integration**:
-  - Lookup standard prices from SSH (Standar Satuan Harga), SBU, HSPK, and ASB.
-- **Automatic Calculations**:
-  - Real-time calculation of Total Price based on `Volume x Harga Satuan`.
-  - PPN (Tax) calculation support (0% or 11%).
+### 1. Dashboard Monitoring & Jadwal 🚀
+- **Real-time Progress**: Visualisasi capaian input RKA dengan indikator persentase interaktif.
+- **Jadwal Tahapan**: Timeline dinamis untuk memantau tahapan perencanaan (Murni/Perubahan) yang sedang berlangsung.
+- **Status Notifikasi**: Informasi terkini mengenai status validasi dan aktivitas sistem.
 
-### 3. **DATA INTEGRATION**
-- **Connected Modules**: Seamless flow between RKPD (Renja) and RKA (Rincian).
-- **History & Tracking**: Keeps track of budget revisions and drafts.
+### 2. Manajemen RKA & RKPD (Renja) 📋
+- **Struktur Hierarki**: Tampilan data terstruktur mulai dari *Urusan > Program > Kegiatan > Sub Kegiatan*.
+- **Indikator Anggaran Cerdas**:
+  - 🔴 **Surplus**: Pagu Validasi > Total Rincian (Sisa Anggaran).
+  - 🟢 **Defisit**: Pagu Validasi < Total Rincian (Over Budget).
+  - 🔵 **Balanced**: Anggaran Sesuai.
+- **Validasi Bertingkat**: Mekanisme kunci (lock) untuk sub kegiatan yang telah divalidasi.
 
-### 4. **SCHEDULE MANAGEMENT (Jadwal)**
-- **Phased Planning**: Manage RKA input phases (e.g., Murni, Perubahan).
-- **Timeline Visualization**: View active schedules directly on the Dashboard.
-- **Status Control**: Lock/Unlock input phases.
+### 3. Input Rincian Belanja (Detailing) 💰
+- **Kalkulator Koefisien Multi-Level**: Mendukung perhitungan kompleks (contoh: `5 Orang x 3 Hari x 2 Kegiatan`).
+- **Pencarian Standar Harga**: Terintegrasi langsung dengan database SSH, SBU, HSPK, dan ASB.
+- **Analisis Satuan**: Auto-complete satuan cerdas dan konversi manual.
+- **Perhitungan Pajak Otomatis**: Opsi PPN 11% yang dapat disesuaikan per item belanja.
 
-## 🛠 Getting Started
+### 4. Manajemen Referensi & Pengguna 👥
+- **Kelola OPD**: Manajemen data organisasi perangkat daerah.
+- **User Roles**: Pembagian hak akses admin dan user (OPD).
+- **Master Data**: Pusat data Urusan, Program, Kegiatan, dan Sumber Dana.
 
-1.  **Clone the repository**
-2.  **Install dependencies**:
+---
+
+## 🆕 What's New (Terbaru)
+
+### Versi 1.0.0 - Initial Release
+- **Fitur Jadwal**: Modul baru untuk mengatur tahapan input RKA.
+- **Dashboard v2**: Desain dashboard baru dengan ringkasan menu dan traffic aktivitas.
+- **Consolidated Schema**: Struktur database yang disederhanakan untuk kemudahan deployment.
+
+---
+
+## 🛠 Instalasi & Penggunaan
+
+Ikuti langkah berikut untuk menjalankan aplikasi di lingkungan lokal Anda:
+
+1.  **Clone Repository**
+    ```bash
+    git clone https://github.com/username/sipd-rka-web.git
+    cd sipd-rka-web
+    ```
+
+2.  **Install Dependencies**
     ```bash
     npm install
     ```
-3.  **Set up Database**:
-    - Create a new project in [Supabase](https://supabase.com/).
-    - Go to the **SQL Editor** in your Supabase dashboard.
-    - Copy the content of `src/db/schema_complete.sql` and run it.
-    - This will create all necessary tables, policies, and triggers.
 
-4.  **Set up Environment Variables**:
-    - Copy `.env.example` to `.env.local`
-    - Add your Supabase URL and Anon Key.
+3.  **Setup Database (Supabase)**
+    - Buat proyek baru di [Supabase](https://supabase.com).
+    - Buka menu **SQL Editor**.
+    - Copy konten dari file `src/db/schema_complete.sql` dan jalankan query.
+    - Database siap digunakan dengan tabel dan *policies* yang lengkap.
 
-5.  **Run the development server**:
+4.  **Konfigurasi Environment**
+    - Duplikasi file `.env.example` menjadi `.env.local`.
+    - Isi URL dan Anon Key Supabase Anda.
+
+5.  **Jalankan Aplikasi**
     ```bash
     npm run dev
     ```
+    Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
-6.  **Open** [http://localhost:3000](http://localhost:3000) inside your browser.
+---
 
-## 📝 License
-by hakiem
+## 📝 Lisensi
+
+Copyright © 2026 **by hakiem**.
+Licensed under [MIT](LICENSE).
