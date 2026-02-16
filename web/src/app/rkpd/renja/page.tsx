@@ -10,7 +10,7 @@ import { supabase } from '@/lib/supabaseClient';
 const RenjaPage = () => {
     const [opds, setOpds] = useState<any[]>([]);
     const [selectedOpdId, setSelectedOpdId] = useState<string>('');
-    const [year, setYear] = useState(new Date().getFullYear());
+    const [year, setYear] = useState(2027);
 
     // Data hierarchy
     const [data, setData] = useState<any>(null);
