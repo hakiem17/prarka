@@ -121,14 +121,14 @@ export default function LaporanPage() {
                     if (!sNode.rincian[rekKode]) {
                         sNode.rincian[rekKode] = {
                             kode_rekening: rekKode,
-                            uraian: 'Rekening Belanja', // We ideally fetch account names, but for now generic placeholder or first item's uraian if it matches
+                            uraian: d.uraian || rekKode,
                             total: 0
                         };
+                    } else if (d.uraian && !sNode.rincian[rekKode].uraian.includes(d.uraian)) {
+                        // Append unique uraian values
+                        sNode.rincian[rekKode].uraian += `, ${d.uraian}`;
                     }
                     sNode.rincian[rekKode].total += (d.total || 0);
-                    // Update generic uraian if needed? Actual Rekening name usually comes from a different master table.
-                    // Accessing that might be too complex for this step without 'master_rekening'.
-                    // We'll leave it as "Rekening Belanja" or similar.
                 });
             });
 
@@ -247,7 +247,7 @@ export default function LaporanPage() {
                                                                                 {Object.values(sub.rincian).map((r) => (
                                                                                     <tr key={r.kode_rekening}>
                                                                                         <td className="px-4 py-2 font-mono text-gray-600">{r.kode_rekening}</td>
-                                                                                        <td className="px-4 py-2 text-gray-700">Belanja {r.kode_rekening}</td>
+                                                                                        <td className="px-4 py-2 text-gray-700">{r.uraian}</td>
                                                                                         <td className="px-4 py-2 text-right font-medium text-gray-900">{formatCurrency(r.total)}</td>
                                                                                     </tr>
                                                                                 ))}

@@ -48,7 +48,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
                             {/* Desktop Breadcrumbs (Top Level) */}
                             <h2 className="text-lg font-bold text-navy-900 dark:text-gray-100 hidden md:block">
-                                Tahun Anggaran 2026
+                                Tahun Anggaran 2027
                             </h2>
                         </div>
 

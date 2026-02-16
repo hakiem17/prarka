@@ -20,7 +20,7 @@ export default function RkaLayout({ children }: { children: React.ReactNode }) {
                         >
                             <Menu className="h-6 w-6" />
                         </button>
-                        <h1 className="text-xl font-semibold text-gray-800">Tahun Anggaran 2026</h1>
+                        <h1 className="text-xl font-semibold text-gray-800">Tahun Anggaran 2027</h1>
                     </div>
 
                     <div className="flex items-center space-x-4">
