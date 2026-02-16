@@ -32,7 +32,7 @@ export default function SshPage() {
         satuan: '',
         harga_satuan: 0,
         kode_rekening: '',
-        tahun: new Date().getFullYear()
+        tahun: 2027
     });
 
     const fetchData = useCallback(async () => {
@@ -95,7 +95,7 @@ export default function SshPage() {
                     satuan: getVal(['Satuan', 'satuan', 'SATUAN']) || '',
                     harga_satuan: parseFloat(getVal(['Harga Satuan', 'harga', 'HARGA', 'Harga', 'HARGA SATUAN']) || 0),
                     kode_rekening: getVal(['Kode Rekening', 'kode_rekening', 'KODE REKENING']) || '',
-                    tahun: new Date().getFullYear()
+                    tahun: 2027
                 };
             }).filter(item => item.uraian_barang); // Ensure valid rows
 
@@ -206,7 +206,7 @@ export default function SshPage() {
         setFormData({
             id: 0, kode_kelompok_barang: '', uraian_kelompok_barang: '',
             kode_barang: '', uraian_barang: '', spesifikasi: '',
-            satuan: '', harga_satuan: 0, kode_rekening: '', tahun: new Date().getFullYear()
+            satuan: '', harga_satuan: 0, kode_rekening: '', tahun: 2027
         });
         setIsEditing(false);
         setIsModalOpen(true);

@@ -30,7 +30,7 @@ export default function SbuPage() {
         satuan: '',
         harga: 0,
         kode_rekening: '',
-        tahun: new Date().getFullYear()
+        tahun: 2027
     });
 
     const fetchData = useCallback(async () => {
@@ -91,7 +91,7 @@ export default function SbuPage() {
                     satuan: getVal(['Satuan', 'satuan', 'SATUAN']) || '',
                     harga: parseFloat(getVal(['Harga', 'harga', 'HARGA', 'Harga Satuan', 'HARGA SATUAN']) || 0),
                     kode_rekening: getVal(['Kode Rekening', 'kode_rekening', 'KODE REKENING']) || '',
-                    tahun: new Date().getFullYear()
+                    tahun: 2027
                 };
             }).filter(item => item.uraian);
 
@@ -189,7 +189,7 @@ export default function SbuPage() {
     const handleAddNew = () => {
         setFormData({
             id: 0, kode: '', uraian: '', spesifikasi: '',
-            satuan: '', harga: 0, kode_rekening: '', tahun: new Date().getFullYear()
+            satuan: '', harga: 0, kode_rekening: '', tahun: 2027
         });
         setIsEditing(false);
         setIsModalOpen(true);
