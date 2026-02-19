@@ -107,6 +107,11 @@ export default function RkaInputPage() {
     const [searchResults, setSearchResults] = useState<any[]>([]);
     const [isSearching, setIsSearching] = useState(false);
 
+    // Search Pagination State
+    const [searchPage, setSearchPage] = useState(1);
+    const [totalSearchResults, setTotalSearchResults] = useState(0);
+    const SEARCH_LIMIT = 50;
+
     // Form State for Adding Item
     const [selectedItem, setSelectedItem] = useState<any>(null);
     const [koefisienList, setKoefisienList] = useState<{ volume: number; satuan: string }[]>([
@@ -123,7 +128,7 @@ export default function RkaInputPage() {
     }, [rincian]);
 
     // Search Function - Triggered by debounced term or type change
-    const handleSearch = useCallback(async () => {
+    const handleSearch = useCallback(async (page = 1) => {
         if (!debouncedSearchTerm || debouncedSearchTerm.length < 3) {
             if (debouncedSearchTerm.length === 0) setSearchResults([]);
             return;
@@ -132,8 +137,14 @@ export default function RkaInputPage() {
         setSearchResults([]);
 
         try {
+            const from = (page - 1) * SEARCH_LIMIT;
+            const to = from + SEARCH_LIMIT - 1;
+
             let table = standarType;
-            let query = supabase.from(table).select('*').limit(20);
+            let query = supabase
+                .from(table)
+                .select('*', { count: 'exact' })
+                .range(from, to);
 
             // Adjust search columns based on table structure
             if (table === 'ssh') {
@@ -142,8 +153,11 @@ export default function RkaInputPage() {
                 query = query.ilike('uraian', `%${debouncedSearchTerm}%`);
             }
 
-            const { data, error } = await query;
+            const { data, error, count } = await query;
             if (error) throw error;
+
+            setTotalSearchResults(count || 0);
+            setSearchPage(page);
 
             // Map to common structure
             const mapped = data?.map(item => ({
@@ -169,7 +183,7 @@ export default function RkaInputPage() {
 
     // Trigger search when dependencies change
     useEffect(() => {
-        handleSearch();
+        handleSearch(1); // Reset to page 1 on new search term/type
     }, [handleSearch]);
 
     // Handle Item Selection
@@ -678,6 +692,35 @@ export default function RkaInputPage() {
                                         </div>
                                     )}
                                 </div>
+
+                                {/* Pagination Controls */}
+                                {totalSearchResults > SEARCH_LIMIT && (
+                                    <div className="p-3 border-t bg-gray-50 flex items-center justify-between text-xs">
+                                        <span className="text-gray-500">
+                                            Showing {((searchPage - 1) * SEARCH_LIMIT) + 1} - {Math.min(searchPage * SEARCH_LIMIT, totalSearchResults)} of {totalSearchResults}
+                                        </span>
+                                        <div className="flex gap-2">
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                disabled={searchPage === 1 || isSearching}
+                                                onClick={() => handleSearch(searchPage - 1)}
+                                                className="h-7 px-2"
+                                            >
+                                                Prev
+                                            </Button>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                disabled={(searchPage * SEARCH_LIMIT) >= totalSearchResults || isSearching}
+                                                onClick={() => handleSearch(searchPage + 1)}
+                                                className="h-7 px-2"
+                                            >
+                                                Next
+                                            </Button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Right Side: Form Input */}
@@ -837,7 +880,8 @@ export default function RkaInputPage() {
                         </div>
                     </div>
                 </div>
-            )}
-        </div>
+            )
+            }
+        </div >
     );
 }
